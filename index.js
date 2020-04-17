@@ -154,5 +154,7 @@ questionForm.addEventListener("submit", (event) => {
   results = [];
   resultDetail.innerHTML = "";
   resultMessage.innerHTML = "";
+  correctCount = 0;
+  falseCount = 0;
   getInput();
 });
