@@ -42,6 +42,10 @@ const launchGame = (amount, number = 0) => {
 
 const checkAnswer = (correctAnswer, amount, number, answer) => {
   console.log(amount, number);
+  anime({
+    targets: "#question-box",
+    translateX: [0, 200],
+  });
   if (correctAnswer == answer) {
     console.log("true");
     correctCount++;
@@ -79,7 +83,10 @@ const displayQuestion = (question, amount, number) => {
   let answer2 = answerList[randomList[1]];
   let answer3 = answerList[randomList[2]];
   let answer4 = answerList[randomList[3]];
-
+  anime({
+    targets: "#question-box",
+    translateX: [-200, 0],
+  });
   questionCard.innerHTML += `<div class="text-center card m-5">
   <div class="m-3 card-body">
     <p id="question">
@@ -121,6 +128,11 @@ const displayResult = (amount) => {
     `;
   });
 };
+
+const animeObject = anime({
+  targets: "#question-box",
+  translateX: 200,
+});
 
 const getRandomIntInclusive = (min, max) => {
   min = Math.ceil(min);
