@@ -2,6 +2,7 @@ let questionForm = document.querySelector("#question-form");
 let questionCard = document.querySelector("#question-box");
 let resultCard = document.querySelector("#result-box");
 let resultDetail = document.querySelector("#result-detail");
+let resultMessage = document.querySelector("#result-message");
 
 let endPoint = "https://opentdb.com/api.php?";
 let questionList = [];
@@ -42,10 +43,7 @@ const launchGame = (amount, number = 0) => {
 
 const checkAnswer = (correctAnswer, amount, number, answer) => {
   console.log(amount, number);
-  anime({
-    targets: "#question-box",
-    translateX: [0, 200],
-  });
+
   if (correctAnswer == answer) {
     console.log("true");
     correctCount++;
@@ -56,9 +54,16 @@ const checkAnswer = (correctAnswer, amount, number, answer) => {
     results.push([questionList[number].question, correctAnswer, answer, false]);
   }
   console.log(results);
+  anime({
+    targets: "#question-box",
+    translateX: [0, 1500],
+  });
 
   number++;
-  launchGame(amount, number);
+
+  setTimeout(function () {
+    launchGame(amount, number);
+  }, 500);
 };
 
 //Functionnal function
@@ -113,7 +118,7 @@ const displayQuestion = (question, amount, number) => {
 };
 
 const displayResult = (amount) => {
-  questionCard.innerHTML = `
+  resultMessage.innerHTML = `
   <h3>Well done my friend. You have ${correctCount} correct answers out of ${amount} !</h3>`;
   resultCard.classList.remove("not-visible");
   results.forEach((result) => {
@@ -128,11 +133,6 @@ const displayResult = (amount) => {
     `;
   });
 };
-
-const animeObject = anime({
-  targets: "#question-box",
-  translateX: 200,
-});
 
 const getRandomIntInclusive = (min, max) => {
   min = Math.ceil(min);
