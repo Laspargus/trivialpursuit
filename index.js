@@ -63,7 +63,7 @@ const checkAnswer = (correctAnswer, amount, number, answer) => {
 
   setTimeout(function () {
     launchGame(amount, number);
-  }, 500);
+  }, 300);
 };
 
 //Functionnal function
@@ -151,5 +151,8 @@ getRandomArray = () => {
 
 questionForm.addEventListener("submit", (event) => {
   event.preventDefault();
+  results = [];
+  resultDetail.innerHTML = "";
+  resultMessage.innerHTML = "";
   getInput();
 });
