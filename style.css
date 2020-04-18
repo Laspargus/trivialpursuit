@@ -1,3 +1,7 @@
 .not-visible {
-  display: none;
+  display: none !important;
+}
+
+#username-form {
+  background-color: azure;
 }

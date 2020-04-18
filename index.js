@@ -3,6 +3,9 @@ let questionCard = document.querySelector("#question-box");
 let resultCard = document.querySelector("#result-box");
 let resultDetail = document.querySelector("#result-detail");
 let resultMessage = document.querySelector("#result-message");
+let usernameForm = document.querySelector("#username-form");
+
+console.log(usernameForm);
 
 let endPoint = "https://opentdb.com/api.php?";
 let questionList = [];
@@ -38,6 +41,7 @@ const launchGame = (amount, number = 0) => {
     displayQuestion(questionList[number], amount, number);
   } else {
     displayResult(amount);
+    displayUsernameForm();
   }
 };
 
@@ -64,6 +68,13 @@ const checkAnswer = (correctAnswer, amount, number, answer) => {
   setTimeout(function () {
     launchGame(amount, number);
   }, 300);
+};
+
+const saveResult = () => {
+  const userName = document.querySelector("#username").value;
+  const total = correctCount + falseCount;
+  const percentage = (correctCount * 100) / total;
+  localStorage.setItem(userName, percentage);
 };
 
 //Functionnal function
@@ -134,6 +145,10 @@ const displayResult = (amount) => {
   });
 };
 
+const displayUsernameForm = () => {
+  usernameForm.classList.remove("not-visible");
+};
+
 const getRandomIntInclusive = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -157,4 +172,9 @@ questionForm.addEventListener("submit", (event) => {
   correctCount = 0;
   falseCount = 0;
   getInput();
+});
+
+usernameForm.addEventListener("submit", (event) => {
+  //event.preventDefault();
+  saveResult();
 });
